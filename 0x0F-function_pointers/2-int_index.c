@@ -1,61 +1,24 @@
-#include "3-calc.h"
+#include "function_pointers.h"
 
 /**
- * op_add - Returns the sum of two numbers.
- * @a: The first number.
- * @b: The second number.
+ * int_index - Return the index if comparison is true, else return -1
+ * @array: The array to search.
+ * @size: The number of elements in the array.
+ * @cmp: Pointer to a function of one of the 3 in main.
  *
- * Return: The sum of a and b.
+ * Return: Index or -1 on failure.
  */
-int op_add(int a, int b)
+int int_index(int *array, int size, int (*cmp)(int))
 {
-	return (a + b);
-}
+	int i;
 
-/**
- * op_sub - Returns the difference of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The difference of a and b.
- */
-int op_sub(int a, int b)
-{
-	return (a - b);
-}
+	if (array == NULL || size <= 0 || cmp == NULL)
+		return (-1);
 
-/**
- * op_mul - Returns the product of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The product of a and b.
- */
-int op_mul(int a, int b)
-{
-	return (a * b);
-}
-
-/**
- * op_div - Returns the division of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The quotient of a and b.
- */
-int op_div(int a, int b)
-{
-	return (a / b);
-}
-
-/**
- * op_mod - Returns the remainder of the division of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The remainder of the division of a by b.
- */
-int op_mod(int a, int b)
-{
-	return (a % b);
+	for (i = 0; i < size; i++)
+	{
+		if (cmp(array[i]))
+			return (i);
+	}
+	return (-1);
 }
